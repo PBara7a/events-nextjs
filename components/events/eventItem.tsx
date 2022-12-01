@@ -1,8 +1,10 @@
 import { Event } from "../../types";
 import Image from "next/image";
-import Link from "next/link";
+import Button from "../ui/Button";
+import DateIcon from "../icons/DateIcon";
 
 import styles from "./eventItem.module.css";
+import AddressIcon from "../icons/AddressIcon";
 
 type EventItemProps = {
   event: Event;
@@ -26,14 +28,16 @@ function EventItem({ event }: EventItemProps) {
         <div className={styles.summary}>
           <h2>{title}</h2>
           <div className={styles.date}>
+            <DateIcon color="#222222" width={20} height={20} />
             <time>{formattedDate}</time>
           </div>
           <div className={styles.address}>
+            <AddressIcon color="#222222" width={20} height={20} />
             <address>{formattedAddress}</address>
           </div>
         </div>
         <div className={styles.actions}>
-          <Link href={`/events/${id}`}>Explore Event</Link>
+          <Button path={`/events/${id}`} text="Explore Event" />
         </div>
       </div>
     </li>

@@ -1,5 +1,5 @@
 import { Event } from "../../types";
-import EventItem from "./eventItem";
+import EventItem from "./EventItem";
 
 import styles from "./eventList.module.css";
 
