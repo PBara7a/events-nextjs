@@ -1,17 +1,16 @@
 type AddressIconProps = {
-  color: string;
   width: number;
   height: number;
 };
 
-function AddressIcon({ color, width, height }: AddressIconProps) {
+function AddressIcon({ width, height }: AddressIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke={color}
+      stroke="currentColor"
       width={width}
       height={height}
     >

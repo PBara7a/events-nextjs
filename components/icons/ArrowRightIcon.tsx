@@ -1,17 +1,16 @@
 type ArrowRightIconProps = {
-  color: string;
   width: number;
   height: number;
 };
 
-function ArrowRightIcon({ color, width, height }: ArrowRightIconProps) {
+function ArrowRightIcon({ width, height }: ArrowRightIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke={color}
+      stroke="currentColor"
       width={width}
       height={height}
     >

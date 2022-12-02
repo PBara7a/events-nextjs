@@ -2,9 +2,10 @@ import { Event } from "../../types";
 import Image from "next/image";
 import Button from "../ui/Button";
 import DateIcon from "../icons/DateIcon";
+import AddressIcon from "../icons/AddressIcon";
+import { formatDate, formatAddress } from "../../utilities/formatters";
 
 import styles from "./eventItem.module.css";
-import AddressIcon from "../icons/AddressIcon";
 
 type EventItemProps = {
   event: Event;
@@ -13,13 +14,8 @@ type EventItemProps = {
 function EventItem({ event }: EventItemProps) {
   const { title, image, date, location, id } = event;
 
-  const formattedDate = new Date(date).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  const formattedAddress = location.replace(", ", "\n");
+  const formattedDate = formatDate(date);
+  const formattedAddress = formatAddress(location);
 
   return (
     <li className={styles.item}>
@@ -28,11 +24,11 @@ function EventItem({ event }: EventItemProps) {
         <div className={styles.summary}>
           <h2>{title}</h2>
           <div className={styles.date}>
-            <DateIcon color="#222222" width={20} height={20} />
+            <DateIcon width={20} height={20} />
             <time>{formattedDate}</time>
           </div>
           <div className={styles.address}>
-            <AddressIcon color="#222222" width={20} height={20} />
+            <AddressIcon width={20} height={20} />
             <address>{formattedAddress}</address>
           </div>
         </div>

@@ -22,7 +22,6 @@
 }
 
 .content h2 {
-  color: #222222;
   margin: 0.5rem 0;
 }
 
@@ -45,7 +44,6 @@
 }
 
 .actions {
-  color: #222222;
   display: flex;
   flex-direction: column;
   padding: 1rem;
