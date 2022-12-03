@@ -4,18 +4,26 @@ import ArrowRightIcon from "../icons/ArrowRightIcon";
 import styles from "./button.module.css";
 
 type ButtonProps = {
-  text: string;
-  path: string;
+  children: string;
+  path?: string;
+  handleClick?: () => {};
 };
 
-function Button({ path, text }: ButtonProps) {
+function Button({ children, path, handleClick }: ButtonProps) {
+  if (path) {
+    return (
+      <Link href={path} className={styles.btn}>
+        <span>{children}</span>
+        <span className={styles.icon}>
+          <ArrowRightIcon width={16} height={16} />
+        </span>
+      </Link>
+    );
+  }
   return (
-    <Link href={path} className={styles.btn}>
-      <span>{text}</span>
-      <span className={styles.icon}>
-        <ArrowRightIcon color="#dafff7" width={16} height={16} />
-      </span>
-    </Link>
+    <button className={styles.btn} onClick={handleClick}>
+      {children}
+    </button>
   );
 }
 

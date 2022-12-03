@@ -41,6 +41,16 @@ export function getAllEvents(): Array<Event> {
   return DUMMY_EVENTS;
 }
 
+export function getAllEventYears(): Array<number> {
+  return getAllEvents().reduce((years: Array<number>, event: Event) => {
+    const year = new Date(event.date).getFullYear();
+    if (!years.includes(year)) {
+      years.push(year);
+    }
+    return years.sort((a, b) => a - b);
+  }, []);
+}
+
 type DateFilters = {
   year: number;
   month: number;

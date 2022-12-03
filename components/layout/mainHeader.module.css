@@ -24,7 +24,9 @@
   color: #94fdfd;
 }
 
-.navigation a {
+.navigation ul {
+  list-style: none;
+  padding: 0;
   text-decoration: none;
   color: #74dacc;
   font-size: 1rem;

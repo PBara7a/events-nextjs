@@ -33,7 +33,7 @@ function EventItem({ event }: EventItemProps) {
           </div>
         </div>
         <div className={styles.actions}>
-          <Button path={`/events/${id}`} text="Explore Event" />
+          <Button path={`/events/${id}`}>Explore Event</Button>
         </div>
       </div>
     </li>
