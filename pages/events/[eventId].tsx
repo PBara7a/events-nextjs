@@ -5,6 +5,7 @@ import { getEventById } from "../../dummy-data";
 import EventSummary from "../../components/event-detail/EventSummary";
 import EventContent from "../../components/event-detail/EventContent";
 import EventLogistics from "../../components/event-detail/EventLogistics";
+import ErrorAlert from "../../components/ui/ErrorAlert";
 
 function EventDetailPage() {
   const [event, setEvent] = useState<Event | null>(null);
@@ -34,7 +35,9 @@ function EventDetailPage() {
       <EventContent>{event.description}</EventContent>
     </>
   ) : (
-    <p>No event found!</p>
+    <ErrorAlert>
+      <p>No event found!</p>
+    </ErrorAlert>
   );
 }
 
