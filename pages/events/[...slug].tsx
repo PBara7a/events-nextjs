@@ -1,24 +1,18 @@
-import { NextRouter, useRouter } from "next/router";
 import EventList from "../../components/events/EventList";
 import ResultsTitle from "../../components/events/ResultsTitle";
 import Button from "../../components/ui/Button";
 import ErrorAlert from "../../components/ui/ErrorAlert";
-import { getFilteredEvents } from "../../dummy-data";
+import { getFilteredEvents } from "../../utilities/apiUtils";
 import { Event } from "../../types";
 
-function FilteredEventsPage() {
-  const router: NextRouter = useRouter();
+type FilteredEventsPageProps = {
+  events: Array<Event>;
+  date: string;
+  hasError?: boolean;
+};
 
-  const filterData = router.query.slug;
-
-  if (!filterData) {
-    return <p className="center">Loading...</p>;
-  }
-
-  const year: number = Number(filterData[0]);
-  const month: number = Number(filterData[1]);
-
-  if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+function FilteredEventsPage({ events, date, hasError = false }: FilteredEventsPageProps) {
+  if (hasError) {
     return (
       <>
         <ErrorAlert>
@@ -31,9 +25,7 @@ function FilteredEventsPage() {
     );
   }
 
-  const filteredEvents: Array<Event> = getFilteredEvents({ year, month });
-
-  if (!filteredEvents.length) {
+  if (!events.length) {
     return (
       <>
         <ErrorAlert>
@@ -46,14 +38,42 @@ function FilteredEventsPage() {
     );
   }
 
-  const date = `${year}/${month}`;
-
   return (
     <>
       <ResultsTitle date={date} />
-      <EventList events={filteredEvents} />
+      <EventList events={events} />
     </>
   );
+}
+
+type ServerSideProps = {
+  params: {
+    slug: Array<string>;
+  };
+};
+
+export async function getServerSideProps({ params }: ServerSideProps) {
+  const filterData = params.slug;
+
+  const year: number = Number(filterData[0]);
+  const month: number = Number(filterData[1]);
+
+  if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+    return {
+      props: {
+        hasError: true,
+      },
+    };
+  }
+
+  const filteredEvents = await getFilteredEvents({ year, month });
+
+  return {
+    props: {
+      events: filteredEvents,
+      date: `${year}/${month}`,
+    },
+  };
 }
 
 export default FilteredEventsPage;

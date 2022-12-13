@@ -20,3 +20,18 @@ export async function getEventById(id: string): Promise<Event | undefined> {
   const events = await getAllEvents();
   return events.find((event) => event.id === id);
 }
+
+type DateFilters = {
+  year: number;
+  month: number;
+};
+
+export async function getFilteredEvents(dateFilter: DateFilters): Promise<Array<Event>> {
+  const { year, month } = dateFilter;
+  const events = await getAllEvents();
+
+  return events.filter((event) => {
+    const eventDate = new Date(event.date);
+    return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
+  });
+}

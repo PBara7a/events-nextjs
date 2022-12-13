@@ -1,14 +1,16 @@
 import { useRef } from "react";
 import { NextRouter, useRouter } from "next/router";
-import { getAllEventYears } from "../../dummy-data";
+import { getAllEventYears } from "../../utilities/years";
 import { months } from "../../utilities/months";
 import Button from "../ui/Button";
 
 import styles from "./eventSearch.module.css";
 
-const years: Array<number> = getAllEventYears();
+type EventSearchProps = {
+  years: Array<number>
+}
 
-function EventSearch() {
+function EventSearch({ years }: EventSearchProps) {
   const router: NextRouter = useRouter();
 
   const yearInputRef = useRef<HTMLSelectElement>(null);
@@ -53,6 +55,16 @@ function EventSearch() {
       <Button>Find Events</Button>
     </form>
   );
+}
+
+export async function getStaticProps() {
+  const years = await getAllEventYears();
+
+  return {
+    props: {
+      years,
+    }
+  }
 }
 
 export default EventSearch;
