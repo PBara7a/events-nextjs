@@ -13,19 +13,14 @@ type EventLogisticsProps = {
   imageAlt: string;
 };
 
-function EventLogistics({
-  date,
-  address,
-  image,
-  imageAlt,
-}: EventLogisticsProps) {
+function EventLogistics({ date, address, image, imageAlt }: EventLogisticsProps) {
   const formattedDate = formatDate(date);
   const formattedAddress = formatAddress(address);
 
   return (
     <section className={styles.logistics}>
       <div className={styles.image}>
-        <Image src={"/" + image} alt={imageAlt} height={300} width={500} />
+        <Image src={"/" + image} alt={imageAlt} height={256} width={256} />
       </div>
       <ul className={styles.list}>
         <LogisticsItem icon={<DateIcon width={16} height={16} />}>

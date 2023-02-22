@@ -19,7 +19,7 @@ function EventItem({ event }: EventItemProps) {
 
   return (
     <li className={styles.item}>
-      <Image src={"/" + image} alt={title} height={300} width={500} />
+      <Image src={"/" + image} alt={title} height={256} width={512} />
       <div className={styles.content}>
         <div className={styles.summary}>
           <h2>{title}</h2>
