@@ -1,3 +1,4 @@
+import Head from "next/head";
 import EventList from "../../components/events/EventList";
 import ResultsTitle from "../../components/events/ResultsTitle";
 import Button from "../../components/ui/Button";
@@ -11,10 +12,18 @@ type FilteredEventsPageProps = {
   hasError?: boolean;
 };
 
-function FilteredEventsPage({ events, date, hasError = false }: FilteredEventsPageProps) {
+function FilteredEventsPage({events, date, hasError = false}: FilteredEventsPageProps) {
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={`All events for ${date}`} />
+    </Head>
+  );
+
   if (hasError) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p className="center">Invalid filter parameters.</p>
         </ErrorAlert>
@@ -28,6 +37,7 @@ function FilteredEventsPage({ events, date, hasError = false }: FilteredEventsPa
   if (!events.length) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filters!</p>
         </ErrorAlert>
@@ -40,6 +50,7 @@ function FilteredEventsPage({ events, date, hasError = false }: FilteredEventsPa
 
   return (
     <>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList events={events} />
     </>

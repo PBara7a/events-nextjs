@@ -3,6 +3,7 @@ import EventSearch from "../../components/events/EventSearch";
 import { getAllEvents } from "../../utilities/apiUtils";
 import { getAllEventYears } from "../../utilities/years";
 import { Event } from "../../types";
+import Head from "next/head";
 
 type EventsPageProps = {
   events: Array<Event>;
@@ -12,7 +13,11 @@ type EventsPageProps = {
 function EventsPage({ events, years }: EventsPageProps) {
   return (
     <>
-      <EventSearch years={years}/>
+      <Head>
+        <title>All Events</title>
+        <meta name="description" content="Find events to better yourself." />
+      </Head>
+      <EventSearch years={years} />
       <EventList events={events} />
     </>
   );
@@ -25,7 +30,7 @@ export async function getStaticProps() {
   return {
     props: {
       events,
-      years
+      years,
     },
     revalidate: 60,
   };
