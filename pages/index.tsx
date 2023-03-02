@@ -1,5 +1,6 @@
 import Head from "next/head";
 import EventList from "../components/events/EventList";
+import NewsletterRegistration from "../components/input/NewsletterRegistration";
 import { Event } from "../types";
 import { getFeaturedEvents } from "../utilities/apiUtils";
 
@@ -14,6 +15,7 @@ function HomePage({ featuredEvents }: HomePageProps) {
         <title>NextJS Events</title>
         <meta name="description" content="Find events to better yourself." />
       </Head>
+      <NewsletterRegistration />
       <EventList events={featuredEvents} />
     </>
   );
