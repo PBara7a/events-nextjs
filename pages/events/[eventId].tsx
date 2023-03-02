@@ -4,6 +4,7 @@ import { getEventById, getFeaturedEvents } from "../../utilities/apiUtils";
 import EventSummary from "../../components/event-detail/EventSummary";
 import EventContent from "../../components/event-detail/EventContent";
 import EventLogistics from "../../components/event-detail/EventLogistics";
+import Comments from "../../components/input/Comments";
 
 type EventDetailPageProps = {
   event: Event;
@@ -32,6 +33,7 @@ function EventDetailPage({ event }: EventDetailPageProps) {
         imageAlt={event.title}
       />
       <EventContent>{event.description}</EventContent>
+      <Comments eventId={event.id} />
     </>
   );
 }
